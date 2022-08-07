@@ -61,6 +61,7 @@ describe 'Merchant Bulk Discounts New' do
     fill_in "threshold", with: 15
     click_button "Submit"
     expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
-    expect(page).to have_content("10 percent off of 15 or more items") 
+    expect(page).to have_content("Percentage Discount: 10") 
+    expect(page).to have_content("Quantity Threshold: 10") 
   end 
 end
