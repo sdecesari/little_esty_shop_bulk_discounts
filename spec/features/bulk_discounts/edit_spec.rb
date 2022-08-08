@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Merchant Bulk Discounts Index' do 
+describe 'Merchant Bulk Discounts Edit' do 
   before :each do 
     @merchant1 = Merchant.create!(name: 'Hair Care')
     @merchant2 = Merchant.create!(name: 'Jewelry')
@@ -52,20 +52,18 @@ describe 'Merchant Bulk Discounts Index' do
     @bulk_item3 = @merchant1.bulk_discounts.create!(percent: 15, threshold: 20)
     @bulk_item4 = @merchant2.bulk_discounts.create!(percent: 20, threshold: 25)
     @bulk_item5 = @merchant2.bulk_discounts.create!(percent: 25, threshold: 30)
+    
+    visit edit_merchant_bulk_discount_path(@merchant1, @bulk_item1)
+  end 
 
-    visit merchant_bulk_discount_path(@merchant1, @bulk_item1)
-  end
+  it "has a pre-populated form to edit a discount" do 
+    fill_in "Percent", with: 5
+    fill_in "Threshold", with: 10
 
-  it "can see the bulk discount's percentage and quantity threshold" do 
+    click_button "Submit"
 
-    expect(page).to have_content("Percentage Discount: 5%")
-    expect(page).to have_content("Quantity Threshold: 10")
-    expect(page).to_not have_content("Percentage Discount: 10%")
-  end
-
-  it "has a link to edit the bulk discount" do 
-    expect(page).to have_link("Edit Discount")
-    click_link "Edit Discount"
-    expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant1, @bulk_item1))
+    expect(current_path).to eq(merchant_bulk_discount_path(@merchant1, @bulk_item1))
+    expect(page).to have_content(5)
+    expect(page).to have_content(10)
   end 
 end 
