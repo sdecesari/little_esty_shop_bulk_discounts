@@ -84,7 +84,7 @@ describe 'Merchant Bulk Discounts Index' do
   it "has a link to create a new discount" do 
     expect(page).to have_link("New Discount")
     click_link "New Discount"
-    expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts/new")
+    expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant1))
   end 
 
   it "has a link to delete the bulk discount" do 
