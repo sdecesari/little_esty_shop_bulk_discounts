@@ -44,10 +44,17 @@
             <td style="text-align:center"><%= i.item.name %></td>
             <td style="text-align:center"><%= i.quantity %></td>
             <td style="text-align:center">$<%= i.unit_price %></td>
+
+            <% if i.discount_used %>
+            <p><%= link_to 'Discount Used', merchant_bulk_discount_path(i.merchant.id, i.discount_used.id) %></p>
+            <% else %>
+            <p>No Discount Used</p>
+            <% end %>
+
             <td style="text-align:center"><%= form_with model: @invoice, url: merchant_invoice_path(@merchant, @invoice), method: :patch, local: true do |f| %>
-                                            <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
-                                            <%= f.submit 'Update Invoice' %>
-                                          <% end %></td><br/>
+              <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
+              <%= f.submit 'Update Invoice' %>
+            <% end %></td><br/>
           </tr>
         </section>
       <% end %>
