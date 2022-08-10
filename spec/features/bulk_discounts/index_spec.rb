@@ -94,4 +94,10 @@ describe 'Merchant Bulk Discounts Index' do
       expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
     end
   end
+
+  it "has the next three holidays", :vcr do 
+    expect(page).to have_content("Labour Day")
+    expect(page).to have_content("Columbus Day")
+    expect(page).to have_content("Veterans Day")
+  end 
 end 
