@@ -56,7 +56,7 @@ describe 'Merchant Bulk Discounts Index' do
     visit merchant_bulk_discounts_path(@merchant1)
   end 
 
-  it "can see bulk discounts with percentage and quantity threshold" do 
+  it "can see bulk discounts with percentage and quantity threshold", :vcr do 
     within "#discount-#{@bulk_item1.id}" do 
       expect(page).to have_content("Percentage Discount: 5%")
       expect(page).to have_content("Quantity Threshold: 10")
@@ -73,7 +73,7 @@ describe 'Merchant Bulk Discounts Index' do
     end 
   end 
 
-  it "has a link to the bulk discount show page" do 
+  it "has a link to the bulk discount show page", :vcr do 
     within "#discount-#{@bulk_item1.id}" do
       expect(page).to have_link("View Discount")
       click_link "View Discount"
@@ -81,13 +81,13 @@ describe 'Merchant Bulk Discounts Index' do
     end
   end 
 
-  it "has a link to create a new discount" do 
+  it "has a link to create a new discount", :vcr do 
     expect(page).to have_link("New Discount")
     click_link "New Discount"
     expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant1))
   end 
 
-  it "has a link to delete the bulk discount" do 
+  it "has a link to delete the bulk discount", :vcr do 
     within "#discount-#{@bulk_item1.id}" do
       expect(page).to have_button("Delete")
       click_button "Delete"

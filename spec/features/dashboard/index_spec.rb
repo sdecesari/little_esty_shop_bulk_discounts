@@ -120,7 +120,7 @@ RSpec.describe 'merchant dashboard' do
     expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %-d, %Y"))
   end
 
-  it "has a link to bulk discounts" do 
+  it "has a link to bulk discounts", :vcr do 
     expect(page).to have_link("Bulk Discounts")
     click_link "Bulk Discounts"
     expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts")
