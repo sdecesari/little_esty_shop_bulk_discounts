@@ -56,7 +56,7 @@ describe 'Merchant Bulk Discounts New' do
     visit new_merchant_bulk_discount_path(@merchant1)
   end 
 
-  it "has a form to add a new bulk discount" do 
+  it "has a form to add a new bulk discount", :vcr do 
     fill_in "percent", with: 10
     fill_in "threshold", with: 15
     click_button "Submit"
